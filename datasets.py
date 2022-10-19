@@ -124,14 +124,14 @@ class Monti(Dataset):
 
 
 class Douban(Monti):
-    def __init__(self, path='data/raw_data/mgcnn/douban/training_test_dataset.mat', **kwargs):
+    def __init__(self, path='content/mg-gat/data/raw_data/mgcnn/douban/training_test_dataset.mat', **kwargs):
         kwargs['name'] = kwargs.get('name', 'Douban')
         kwargs['user_graph'] = sp.coo_matrix(self._load_matlab_file(path, 'W_users'))
         super(Douban, self).__init__(path, **kwargs)
 
 
 class Flixster(Monti):
-    def __init__(self, path='data/raw_data/mgcnn/flixster/training_test_dataset_10_NNs.mat', **kwargs):
+    def __init__(self, path='content/mg-gat/data/raw_data/mgcnn/flixster/training_test_dataset_10_NNs.mat', **kwargs):
         kwargs['name'] = kwargs.get('name', 'Flixster')
         kwargs['user_graph'] = sp.coo_matrix(self._load_matlab_file(path, 'W_users'))
         kwargs['item_graph'] = sp.coo_matrix(self._load_matlab_file(path, 'W_movies'))
@@ -139,7 +139,7 @@ class Flixster(Monti):
 
 
 class Movielens(Monti):
-    def __init__(self, path='data/raw_data/mgcnn/movielens/split_1.mat', **kwargs):
+    def __init__(self, path='content/mg-gat/data/raw_data/mgcnn/movielens/split_1.mat', **kwargs):
         kwargs['name'] = kwargs.get('name', 'Movielens')
         kwargs['user_graph'] = sp.coo_matrix(self._load_matlab_file(path, 'W_users'))
         kwargs['item_graph'] = sp.coo_matrix(self._load_matlab_file(path, 'W_movies'))
@@ -149,14 +149,14 @@ class Movielens(Monti):
 
 
 class YahooMusic(Monti):
-    def __init__(self, path='data/raw_data/mgcnn/yahoo_music/training_test_dataset_10_NNs.mat', **kwargs): 
+    def __init__(self, path='content/mg-gat/data/raw_data/mgcnn/yahoo_music/training_test_dataset_10_NNs.mat', **kwargs): 
         kwargs['name'] = kwargs.get('name', 'YahooMusic')
         kwargs['item_graph'] = sp.coo_matrix(self._load_matlab_file(path, 'W_tracks'))
         super(YahooMusic, self).__init__(path, **kwargs)
 
 
 class MovieLens100K(Movielens):
-    def __init__(self, path='data/raw_data/ml-100k', **kwargs):        
+    def __init__(self, path='content/mg-gat/data/raw_data/ml-100k', **kwargs):        
         user_columns = ['user_id', 'age', 'gender', 'occupation', 'zip_code']
         user = pd.read_csv(path + '/u.user', engine='python', encoding='ISO-8859-1', sep='|', names=user_columns)
         user.age = user.age.astype(float)/user.age.max()
@@ -180,7 +180,7 @@ class MovieLens100K(Movielens):
 
 
 class Yelp2018(Dataset):
-    def __init__(self, state, path='data/raw_data/yelp-2018', **kwargs):
+    def __init__(self, state, path='content/mg-gat/data/raw_data/yelp-2018', **kwargs):
         kwargs['name'] = state.upper().replace(' ', '')
         
         print('loading user data...')
@@ -324,8 +324,8 @@ class Yelp2018(Dataset):
 
 if __name__ == '__main__':
     dataset = MovieLens100K()
-    dataset.save('data/datasets')
-    dataset = Dataset.load('data/datasets/MovieLens100K')
+    dataset.save('content/mg-gat/data/datasets')
+    dataset = Dataset.load('content/mg-gat/data/datasets/MovieLens100K')
     print(dataset.name)
     print(dataset.n_user)
     print(dataset.n_item)
